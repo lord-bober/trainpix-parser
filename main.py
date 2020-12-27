@@ -92,10 +92,8 @@ def search_models(models, model_str):
 
 if __name__ == '__main__':
     models = get_models()
-
     print("Введите модель:")
     model = input()
-
     model_link = search_models(models, model)[1]
 
     cnt = 0
