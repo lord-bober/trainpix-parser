@@ -90,20 +90,21 @@ def search_models(models, model_str):
         return list(res.items())[choice-1]
 
 
-models = get_models()
+if __name__ == '__main__':
+    models = get_models()
 
-print("Введите модель:")
-model = input()
+    print("Введите модель:")
+    model = input()
 
-model_link = search_models(models, model)[1]
+    model_link = search_models(models, model)[1]
 
-cnt = 0
-loco_list = []
-title, new_list = get_array(model_link, cnt)
-loco_list += new_list
-while len(new_list)-2 == 500:
-    cnt += 500
-    _, new_list = get_array(model_link, cnt)
+    cnt = 0
+    loco_list = []
+    title, new_list = get_array(model_link, cnt)
     loco_list += new_list
+    while len(new_list) - 2 == 500:
+        cnt += 500
+        _, new_list = get_array(model_link, cnt)
+        loco_list += new_list
 
-output_stats(title, get_stats(loco_list))
+    output_stats(title, get_stats(loco_list))
