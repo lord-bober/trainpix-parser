@@ -12,7 +12,6 @@ def get_stats(loco_list):
         if state_select in ['s1', 's11']:
             worked = 1
         assign = loco.find_all('td', {'class': 'cs'})
-        print(assign)
         if len(assign) > 2:
             assign = assign[-2:]
         if len(assign) == 2:
@@ -33,7 +32,6 @@ def get_stats(loco_list):
                     roads[assign[0].text] = {assign[1].text: [1, 1]}
                 else:
                     roads[assign[0].text] = {assign[1].text: [0, 1]}
-        print(roads, cnt, cnt_worked)
     return roads, cnt, cnt_worked
 
 
