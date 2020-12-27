@@ -54,7 +54,7 @@ def get_array(serie, cnt):
     r = s.get(url, cookies={'divide': '1'})
     soup = bs4.BeautifulSoup(r.text, 'lxml')
     title = soup.h2.text
-    loco_list = soup.find_all('tr', {'class': ['s1', 's3', 's11', 's13']})
+    loco_list = soup.find_all('tr', {'class': ['s1', 's11', 's2', 's12', 's3', 's13']})
     return title, loco_list
 
 
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     loco_list = []
     title, new_list = get_array(model_link, cnt)
     loco_list += new_list
-    while len(new_list) - 2 == 500:
+    while len(new_list) - 3 == 500:
         cnt += 500
         _, new_list = get_array(model_link, cnt)
         loco_list += new_list
