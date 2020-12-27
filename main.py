@@ -12,6 +12,9 @@ def get_stats(loco_list):
         if state_select in ['s1', 's11']:
             worked = 1
         assign = loco.find_all('td', {'class': 'cs'})
+        print(assign)
+        if len(assign) > 2:
+            assign = assign[-2:]
         if len(assign) == 2:
             cnt += 1
             if worked:
@@ -30,6 +33,7 @@ def get_stats(loco_list):
                     roads[assign[0].text] = {assign[1].text: [1, 1]}
                 else:
                     roads[assign[0].text] = {assign[1].text: [0, 1]}
+        print(roads, cnt, cnt_worked)
     return roads, cnt, cnt_worked
 
 
@@ -69,7 +73,7 @@ def output_stats(title, stats):
             cnt_road_worked += cnt[0]
             cnt_road_all += cnt[1]
             print("    {0}: {1}/{2}".format(depot, cnt[0], cnt[1]))
-        print("    Всего по дороге: {0}/{1}".format(cnt_road_worked, cnt_road_all))
+        print("  Всего по дороге: {0}/{1}".format(cnt_road_worked, cnt_road_all))
     print("Всего: {0}/{1}".format(cnt_worked, cnt_all))
 
 
@@ -95,7 +99,6 @@ if __name__ == '__main__':
     print("Введите модель:")
     model = input()
     model_link = search_models(models, model)[1]
-
     cnt = 0
     loco_list = []
     title, new_list = get_array(model_link, cnt)
