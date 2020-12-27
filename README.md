@@ -1,2 +1,3 @@
 # trainpix-parser
-Parse trainpix.org and get some statistic
+
+Получение статистики по серии локомотивов с сайта trainpix.org
