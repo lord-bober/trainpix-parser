@@ -75,13 +75,15 @@ def output_stats(title, stats):
     print("Всего: {0}/{1}".format(cnt_worked, cnt_all))
 
 
-def search_models(models, model_str):
+def search_model_link(models, model_str):
     res = dict()
     for key, val in models.items():
         if key.find(model_str) != -1:
             res[key] = val
+    if len(res) == 0:
+        return None
     if len(res) == 1:
-        return list(res.items())[0]
+        return list(res.items())[0][1]
     else:
         id = 1
         for key in res:
@@ -89,21 +91,24 @@ def search_models(models, model_str):
             id += 1
         print("Введите номер нужной модели из списка выше: ")
         choice = int(input())
-        return list(res.items())[choice-1]
+        return list(res.items())[choice-1][1]
 
 
 if __name__ == '__main__':
     models = get_models()
     print("Введите модель:")
     model = input()
-    model_link = search_models(models, model)[1]
-    cnt = 0
-    loco_list = []
-    title, new_list = get_array(model_link, cnt)
-    loco_list += new_list
-    while len(new_list) - 3 == 500:
-        cnt += 500
-        _, new_list = get_array(model_link, cnt)
+    model_link = search_model_link(models, model)
+    if model_link:
+        cnt = 0
+        loco_list = []
+        title, new_list = get_array(model_link, cnt)
         loco_list += new_list
+        while len(new_list) - 3 == 500:
+            cnt += 500
+            _, new_list = get_array(model_link, cnt)
+            loco_list += new_list
 
-    output_stats(title, get_stats(loco_list))
+        output_stats(title, get_stats(loco_list))
+    else:
+        print("Модель не найдена")
