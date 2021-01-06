@@ -78,7 +78,7 @@ def output_stats(title, stats):
 def search_model_link(models, model_str):
     res = dict()
     for key, val in models.items():
-        if key.find(model_str) != -1:
+        if key.upper().find(model_str) != -1:
             res[key] = val
     if len(res) == 0:
         return None
@@ -97,7 +97,7 @@ def search_model_link(models, model_str):
 if __name__ == '__main__':
     models = get_models()
     print("Введите модель:")
-    model = input()
+    model = input().upper()
     model_link = search_model_link(models, model)
     if model_link:
         cnt = 0
