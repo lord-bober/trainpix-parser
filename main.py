@@ -91,7 +91,10 @@ def search_model_link(models, model_str):
             id += 1
         print("Введите номер нужной модели из списка выше: ")
         choice = int(input())
-        return list(res.items())[choice-1][1]
+        if 1 <= choice <= len(list(res.items())):
+            return list(res.items())[choice-1][1]
+        else:
+            return None
 
 
 if __name__ == '__main__':
